@@ -16,6 +16,9 @@
 		C0F264AC1E358BC400DDAFB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F264AB1E358BC400DDAFB1 /* Assets.xcassets */; };
 		C0F264AF1E358BC400DDAFB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F264AD1E358BC400DDAFB1 /* Main.storyboard */; };
 		C0F264BA1E358BC400DDAFB1 /* MapRoutingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264B91E358BC400DDAFB1 /* MapRoutingTests.m */; };
+		C0F264C51E358BFE00DDAFB1 /* usa.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0F264C41E358BFE00DDAFB1 /* usa.txt */; };
+		C0F264CD1E358C2E00DDAFB1 /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264C81E358C2E00DDAFB1 /* Graph.m */; };
+		C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264CC1E358C2E00DDAFB1 /* Vertex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,11 @@
 		C0F264B51E358BC400DDAFB1 /* MapRoutingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapRoutingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F264B91E358BC400DDAFB1 /* MapRoutingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapRoutingTests.m; sourceTree = "<group>"; };
 		C0F264BB1E358BC400DDAFB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0F264C41E358BFE00DDAFB1 /* usa.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = usa.txt; sourceTree = "<group>"; };
+		C0F264C71E358C2E00DDAFB1 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		C0F264C81E358C2E00DDAFB1 /* Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
+		C0F264CB1E358C2E00DDAFB1 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		C0F264CC1E358C2E00DDAFB1 /* Vertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,8 @@
 				C0F264A61E358BC400DDAFB1 /* GameScene.m */,
 				C0F264A81E358BC400DDAFB1 /* ViewController.h */,
 				C0F264A91E358BC400DDAFB1 /* ViewController.m */,
+				C0F264D01E358C6D00DDAFB1 /* Data Structure */,
+				C0F264C61E358C0300DDAFB1 /* Map Data */,
 				C0F264AB1E358BC400DDAFB1 /* Assets.xcassets */,
 				C0F264AD1E358BC400DDAFB1 /* Main.storyboard */,
 				C0F264B01E358BC400DDAFB1 /* Info.plist */,
@@ -117,6 +127,25 @@
 				C0F264BB1E358BC400DDAFB1 /* Info.plist */,
 			);
 			path = MapRoutingTests;
+			sourceTree = "<group>";
+		};
+		C0F264C61E358C0300DDAFB1 /* Map Data */ = {
+			isa = PBXGroup;
+			children = (
+				C0F264C41E358BFE00DDAFB1 /* usa.txt */,
+			);
+			name = "Map Data";
+			sourceTree = "<group>";
+		};
+		C0F264D01E358C6D00DDAFB1 /* Data Structure */ = {
+			isa = PBXGroup;
+			children = (
+				C0F264C71E358C2E00DDAFB1 /* Graph.h */,
+				C0F264C81E358C2E00DDAFB1 /* Graph.m */,
+				C0F264CB1E358C2E00DDAFB1 /* Vertex.h */,
+				C0F264CC1E358C2E00DDAFB1 /* Vertex.m */,
+			);
+			name = "Data Structure";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +234,7 @@
 			files = (
 				C0F264A21E358BC400DDAFB1 /* GameScene.sks in Resources */,
 				C0F264AC1E358BC400DDAFB1 /* Assets.xcassets in Resources */,
+				C0F264C51E358BFE00DDAFB1 /* usa.txt in Resources */,
 				C0F264A41E358BC400DDAFB1 /* Actions.sks in Resources */,
 				C0F264AF1E358BC400DDAFB1 /* Main.storyboard in Resources */,
 			);
@@ -225,8 +255,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0F264A01E358BC400DDAFB1 /* main.m in Sources */,
+				C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */,
 				C0F264A71E358BC400DDAFB1 /* GameScene.m in Sources */,
 				C0F264AA1E358BC400DDAFB1 /* ViewController.m in Sources */,
+				C0F264CD1E358C2E00DDAFB1 /* Graph.m in Sources */,
 				C0F2649D1E358BC400DDAFB1 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
