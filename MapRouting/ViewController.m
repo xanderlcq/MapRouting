@@ -26,22 +26,6 @@
     
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount = YES;
-//    MinHeapTree *mht = [[MinHeapTree alloc] init];
-//    //NSMutableArray *original = [[NSMutableArray alloc] init];
-//    for(int i = 0;i < 15;i++){
-//        int n = arc4random()%50;
-//        Vertex *v = [[Vertex alloc] initWithValue:[NSString stringWithFormat:@"%i",n]];
-//        v.distance = n;
-//        [mht insertVertex:v];
-//        
-//    }
-//    NSLog(@"og:");
-//    [mht print];
-//     NSLog(@"\n");
-//    for(int i = 0;i < 15; i ++){
-//        NSLog(@"%@",[mht getMin].value);
-//        [mht print];
-//    }
 }
 
 @end

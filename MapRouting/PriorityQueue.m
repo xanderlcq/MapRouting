@@ -16,10 +16,10 @@
     }
     return self;
 }
--(void) insert:(Vertex *) v{
+-(void) enqueue:(Vertex *) v{
     [self.minHeap insertVertex:v];
 }
--(Vertex *) popMin{
+-(Vertex *) dequeue{
     return [self.minHeap getMin];
 }
 @end

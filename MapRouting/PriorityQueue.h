@@ -14,6 +14,6 @@
 @property MinHeapTree *minHeap;
 
 -(id) init;
--(void) insert:(Vertex *) v;
--(Vertex *) popMin;
+-(void) enqueue:(Vertex *) v;
+-(Vertex *) dequeue;
 @end
