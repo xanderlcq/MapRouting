@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Vertex.h"
+#import "MinHeapTree.h"
 @interface PriorityQueue : NSObject
+
+@property MinHeapTree *minHeap;
+
 -(id) init;
 -(void) insert:(Vertex *) v;
 -(Vertex *) popMin;

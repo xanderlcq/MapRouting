@@ -9,6 +9,17 @@
 #import "PriorityQueue.h"
 
 @implementation PriorityQueue
-
-
+-(id) init{
+    self = [super init];
+    if(self) {
+        self.minHeap = [[MinHeapTree alloc] init];
+    }
+    return self;
+}
+-(void) insert:(Vertex *) v{
+    [self.minHeap insertVertex:v];
+}
+-(Vertex *) popMin{
+    return [self.minHeap getMin];
+}
 @end

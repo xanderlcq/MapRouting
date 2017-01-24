@@ -14,7 +14,6 @@
 -(id) init;
 -(id) initWithObjectFromArray:(NSArray *) arr;
 -(void) insertVertex:(Vertex *) v;
-//-(void) deleteVertex:(Vertex *) v;
 -(Vertex *) getMin;
 -(NSString *) toString;
 -(void) print;

@@ -42,6 +42,17 @@
     [self.data insertObject:v atIndex:self.currentIndex++];
     [self bubble];
 }
+-(void) deleteVertex:(Vertex *) v{
+    for(int i = 1; i < self.currentIndex;i++){
+        if(v== [self.data objectAtIndex:i]){
+            [self.data replaceObjectAtIndex:i withObject:[self.data objectAtIndex:self.currentIndex-1]];
+            [self.data removeObjectAtIndex:self.currentIndex-1];
+            self.currentIndex--;
+            [self sink:i];
+            return;
+        }
+    }
+}
 -(Vertex *) getMin{
     if(self.currentIndex == 1)
         return nil;

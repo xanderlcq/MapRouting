@@ -33,6 +33,7 @@
 }
 
 -(void) testMinHeapTree{
+    //Sequential Values
     MinHeapTree *mht = [[MinHeapTree alloc] init];
     for(int i = 0;i < 15;i++){
         Vertex *v = [[Vertex alloc] initWithValue:[NSString stringWithFormat:@"%i",i]];
@@ -40,6 +41,9 @@
         [mht insertVertex:v];
     }
     XCTAssert([[mht toString] isEqualToString:@"0,1,2,3,4,5,6,7,8,9,10,11,12,13,14"]);
+
+    
+    //Random Values
     mht = [[MinHeapTree alloc] init];
     for(int i = 0;i < 500;i++){
         int n = arc4random()%50;
@@ -52,7 +56,7 @@
     
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
-    
+
     Vertex *prev = [mht getMin];
     for(int i = 0;i < 499; i ++){
         NSNumber *prevNumber = [f numberFromString:prev.value];
