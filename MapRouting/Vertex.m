@@ -23,7 +23,7 @@
 }
 -(void) addAjacent:(Vertex *) vertext{
     [self.adjacentVertices addObject:vertext];
-    [self.adjacentWeights addObject:[NSNumber numberWithInt:0]];
+    [self.adjacentWeights addObject:[NSNumber numberWithInt:-1]];
 }
 -(void) addAjacentWithWeight:(Vertex *) vertext weigh:(NSNumber*) weight{
     [self.adjacentVertices addObject:vertext];

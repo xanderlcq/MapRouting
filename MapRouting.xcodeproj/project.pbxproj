@@ -19,6 +19,8 @@
 		C0F264C51E358BFE00DDAFB1 /* usa.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0F264C41E358BFE00DDAFB1 /* usa.txt */; };
 		C0F264CD1E358C2E00DDAFB1 /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264C81E358C2E00DDAFB1 /* Graph.m */; };
 		C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264CC1E358C2E00DDAFB1 /* Vertex.m */; };
+		C0F264D31E35933A00DDAFB1 /* MinHeapTree.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264D21E35933A00DDAFB1 /* MinHeapTree.m */; };
+		C0F264D61E359C8200DDAFB1 /* PriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264D51E359C8200DDAFB1 /* PriorityQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		C0F264C81E358C2E00DDAFB1 /* Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
 		C0F264CB1E358C2E00DDAFB1 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		C0F264CC1E358C2E00DDAFB1 /* Vertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
+		C0F264D11E35933A00DDAFB1 /* MinHeapTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinHeapTree.h; sourceTree = "<group>"; };
+		C0F264D21E35933A00DDAFB1 /* MinHeapTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinHeapTree.m; sourceTree = "<group>"; };
+		C0F264D41E359C8200DDAFB1 /* PriorityQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityQueue.h; sourceTree = "<group>"; };
+		C0F264D51E359C8200DDAFB1 /* PriorityQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityQueue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +150,10 @@
 				C0F264C81E358C2E00DDAFB1 /* Graph.m */,
 				C0F264CB1E358C2E00DDAFB1 /* Vertex.h */,
 				C0F264CC1E358C2E00DDAFB1 /* Vertex.m */,
+				C0F264D41E359C8200DDAFB1 /* PriorityQueue.h */,
+				C0F264D51E359C8200DDAFB1 /* PriorityQueue.m */,
+				C0F264D11E35933A00DDAFB1 /* MinHeapTree.h */,
+				C0F264D21E35933A00DDAFB1 /* MinHeapTree.m */,
 			);
 			name = "Data Structure";
 			sourceTree = "<group>";
@@ -254,6 +264,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0F264D31E35933A00DDAFB1 /* MinHeapTree.m in Sources */,
+				C0F264D61E359C8200DDAFB1 /* PriorityQueue.m in Sources */,
 				C0F264A01E358BC400DDAFB1 /* main.m in Sources */,
 				C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */,
 				C0F264A71E358BC400DDAFB1 /* GameScene.m in Sources */,
@@ -453,6 +465,7 @@
 				C0F264C01E358BC400DDAFB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C0F264C11E358BC400DDAFB1 /* Build configuration list for PBXNativeTarget "MapRoutingTests" */ = {
 			isa = XCConfigurationList;
@@ -461,6 +474,7 @@
 				C0F264C31E358BC400DDAFB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
