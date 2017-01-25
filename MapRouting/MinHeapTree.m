@@ -102,7 +102,9 @@
 -(BOOL) compare:(int) index1 isGreaterThan:(int)index2{
     return ((Vertex *)[self.data objectAtIndex:index1]).distance> ((Vertex *)[self.data objectAtIndex:index2]).distance;
 }
-
+-(BOOL) contains:(Vertex *) v{
+    return [self.data containsObject:v];
+}
 -(NSString *) toString{
     NSMutableArray *stringArray = [[NSMutableArray alloc] init];
     for(int i = 1; i < self.currentIndex;i++){

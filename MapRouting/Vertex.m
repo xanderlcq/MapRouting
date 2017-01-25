@@ -21,6 +21,20 @@
     }
     return self;
 }
+-(id)initWithValue:(NSString *)v x:(double)x y:(double)y{
+    self = [super init];
+    if(self){
+        self.value = v;
+        self.adjacentWeights = [[NSMutableArray alloc] init];
+        self.adjacentVertices = [[NSMutableArray alloc] init];
+        self.distance = -1;
+        self.color = @"white";
+        self.predecessor = nil;
+        self.x = x;
+        self.y = y;
+    }
+    return self;
+}
 -(void) addAjacent:(Vertex *) vertext{
     [self.adjacentVertices addObject:vertext];
     [self.adjacentWeights addObject:[NSNumber numberWithInt:-1]];

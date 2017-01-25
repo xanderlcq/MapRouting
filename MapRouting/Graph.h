@@ -17,11 +17,19 @@
 -(id)init;
 
 /**
- Add a vertex to the graph
+ Add a vertex to the graph with name
 
  @param vertexName The name/value of the vertext
  */
 -(void)addVertex:(NSString *) vertexName;
+
+
+/**
+ Add a vertex to the graph with name and vertex
+
+ @param vertexName The name/value of the vertex and the premade vertex
+ */
+-(void)addVertex:(NSString *) vertexName vertex:(Vertex*)v;
 
 
 /**
@@ -58,7 +66,7 @@
  @param vertexName2 second vertex (to/destination)
  @param weight      the weight of the edge
  */
--(void)addOneWayConnectionFromWithWeight:(NSString *) vertexName1 and:(NSString*) vertexName2 weigh:(NSNumber *) weight;
+-(void)addOneWayConnectionFromWithWeight:(NSString *) vertexName1 to:(NSString*) vertexName2 weigh:(NSNumber *) weight;
 
 
 /**

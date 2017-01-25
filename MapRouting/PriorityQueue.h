@@ -16,4 +16,5 @@
 -(id) init;
 -(void) enqueue:(Vertex *) v;
 -(Vertex *) dequeue;
+-(BOOL) contains:(Vertex *) v;
 @end

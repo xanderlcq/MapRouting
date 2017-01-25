@@ -22,4 +22,7 @@
 -(Vertex *) dequeue{
     return [self.minHeap getMin];
 }
+-(BOOL) contains:(Vertex *) v{
+    return [self.minHeap contains:v];
+}
 @end

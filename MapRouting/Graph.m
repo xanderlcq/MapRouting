@@ -33,12 +33,19 @@
     }
 }
 
+-(void)addVertex:(NSString *) vertexName vertex:(Vertex*)v{
+    if(![self contains:vertexName]){
+        [self.vertices setObject:v forKey:vertexName];
+    }
+}
+
+
 -(void)addBothWayConnection:(NSString *) vertexName1 and:(NSString*) vertexName2{
     [self addBothWayConnectionWithWeight:vertexName1 and:vertexName2 weigh:[NSNumber numberWithInt:0]];
 }
 
 -(void)addOneWayConnectionFrom:(NSString *) vertexName1 to:(NSString*) vertexName2{
-    [self addOneWayConnectionFromWithWeight:vertexName1 and:vertexName2 weigh:[NSNumber numberWithInt:0]];
+    [self addOneWayConnectionFromWithWeight:vertexName1 to:vertexName2 weigh:[NSNumber numberWithInt:0]];
 }
 
 -(void)addBothWayConnectionWithWeight:(NSString *) vertexName1 and:(NSString*) vertexName2 weigh:(NSNumber *) weight{
@@ -58,7 +65,7 @@
     }
 }
 
--(void)addOneWayConnectionFromWithWeight:(NSString *) vertexName1 and:(NSString*) vertexName2 weigh:(NSNumber *) weight{
+-(void)addOneWayConnectionFromWithWeight:(NSString *) vertexName1 to:(NSString*) vertexName2 weigh:(NSNumber *) weight{
     if(![self contains:vertexName1]){
         [self addVertex:vertexName1];
     }

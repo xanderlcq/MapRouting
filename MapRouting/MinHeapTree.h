@@ -17,4 +17,5 @@
 -(Vertex *) getMin;
 -(NSString *) toString;
 -(void) print;
+-(BOOL) contains:(Vertex *) v;
 @end

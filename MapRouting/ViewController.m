@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "MinHeapTree.h"
 #import "Vertex.h"
+#import "DataLoadingProc.h"
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -26,6 +27,10 @@
     
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount = YES;
+    DataLoadingProc *temp = [[DataLoadingProc alloc] init];
+    [temp loadGraphFromTxt:@"usa"];
+        
+    
 }
 
 @end

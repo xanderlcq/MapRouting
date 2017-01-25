@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C053FF5E1E38E490004D8CD4 /* DataLoadingProc.m in Sources */ = {isa = PBXBuildFile; fileRef = C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */; };
 		C0F2649D1E358BC400DDAFB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F2649C1E358BC400DDAFB1 /* AppDelegate.m */; };
 		C0F264A01E358BC400DDAFB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F2649F1E358BC400DDAFB1 /* main.m */; };
 		C0F264A21E358BC400DDAFB1 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C0F264A11E358BC400DDAFB1 /* GameScene.sks */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C053FF5C1E38E490004D8CD4 /* DataLoadingProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLoadingProc.h; sourceTree = "<group>"; };
+		C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLoadingProc.m; sourceTree = "<group>"; };
 		C0F264981E358BC400DDAFB1 /* MapRouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapRouting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F2649B1E358BC400DDAFB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F2649C1E358BC400DDAFB1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 		C0F264C61E358C0300DDAFB1 /* Map Data */ = {
 			isa = PBXGroup;
 			children = (
+				C053FF5C1E38E490004D8CD4 /* DataLoadingProc.h */,
+				C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */,
 				C0F264C41E358BFE00DDAFB1 /* usa.txt */,
 			);
 			name = "Map Data";
@@ -267,6 +272,7 @@
 				C0F264D31E35933A00DDAFB1 /* MinHeapTree.m in Sources */,
 				C0F264D61E359C8200DDAFB1 /* PriorityQueue.m in Sources */,
 				C0F264A01E358BC400DDAFB1 /* main.m in Sources */,
+				C053FF5E1E38E490004D8CD4 /* DataLoadingProc.m in Sources */,
 				C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */,
 				C0F264A71E358BC400DDAFB1 /* GameScene.m in Sources */,
 				C0F264AA1E358BC400DDAFB1 /* ViewController.m in Sources */,
