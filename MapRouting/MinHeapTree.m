@@ -95,20 +95,21 @@
 }
 
 -(void) swap:(int) a with:(int) b{
-    Vertex *temp = [self.data objectAtIndex:a];
-    [self.data replaceObjectAtIndex:a withObject:[self.data objectAtIndex:b]];
-    [self.data replaceObjectAtIndex:b withObject:temp];
+    [self.data exchangeObjectAtIndex:a withObjectAtIndex:b];
 }
+
 -(BOOL) compare:(int) index1 isGreaterThan:(int)index2{
     return ((Vertex *)[self.data objectAtIndex:index1]).distance> ((Vertex *)[self.data objectAtIndex:index2]).distance;
 }
+
 -(BOOL) contains:(Vertex *) v{
     return [self.data containsObject:v];
 }
+
 -(NSString *) toString{
     NSMutableArray *stringArray = [[NSMutableArray alloc] init];
     for(int i = 1; i < self.currentIndex;i++){
-        [stringArray addObject:((Vertex*)[self.data objectAtIndex:i]).value];
+        [stringArray addObject:[NSNumber numberWithInt:((Vertex*)[self.data objectAtIndex:i]).value]];
     }
     return [stringArray componentsJoinedByString:@","];
 }

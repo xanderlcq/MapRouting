@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 @interface Vertex : NSObject
 
-@property NSString *value;
+//@property NSString *value;
 @property int distance;
 @property Vertex *predecessor;
-@property NSString *color;
+//@property NSString *color;
 @property double x;
 @property double y;
+@property int value;
 
 @property NSMutableArray * adjacentVertices;
 @property NSMutableArray * adjacentWeights;
 
--(id)initWithValue:(NSString *)v;
--(id)initWithValue:(NSString *)v x:(double)x y:(double)y;
+-(id)initWithValue:(int)v;
+-(id)initWithValue:(int)v x:(double)x y:(double)y;
+
 
 -(BOOL) containsAdjacent:(Vertex *) vertext;
 -(void) addAjacent:(Vertex *) vertext;

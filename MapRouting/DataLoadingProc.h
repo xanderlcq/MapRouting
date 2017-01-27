@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Graph.h"
+#import "MapGraph.h"
 @interface DataLoadingProc : NSObject
--(Graph *)loadGraphFromTxt:(NSString *) fileName;
+-(MapGraph *)loadGraphFromTxt:(NSString *) fileName;
 @end

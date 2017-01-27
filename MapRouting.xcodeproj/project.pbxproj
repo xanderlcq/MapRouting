@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C053FF5E1E38E490004D8CD4 /* DataLoadingProc.m in Sources */ = {isa = PBXBuildFile; fileRef = C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */; };
+		C066B3C11E3ADEDE00C76543 /* MapGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C066B3C01E3ADEDE00C76543 /* MapGraph.m */; };
 		C0F2649D1E358BC400DDAFB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F2649C1E358BC400DDAFB1 /* AppDelegate.m */; };
 		C0F264A01E358BC400DDAFB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F2649F1E358BC400DDAFB1 /* main.m */; };
 		C0F264A21E358BC400DDAFB1 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C0F264A11E358BC400DDAFB1 /* GameScene.sks */; };
@@ -18,7 +19,6 @@
 		C0F264AF1E358BC400DDAFB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F264AD1E358BC400DDAFB1 /* Main.storyboard */; };
 		C0F264BA1E358BC400DDAFB1 /* MapRoutingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264B91E358BC400DDAFB1 /* MapRoutingTests.m */; };
 		C0F264C51E358BFE00DDAFB1 /* usa.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0F264C41E358BFE00DDAFB1 /* usa.txt */; };
-		C0F264CD1E358C2E00DDAFB1 /* Graph.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264C81E358C2E00DDAFB1 /* Graph.m */; };
 		C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264CC1E358C2E00DDAFB1 /* Vertex.m */; };
 		C0F264D31E35933A00DDAFB1 /* MinHeapTree.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264D21E35933A00DDAFB1 /* MinHeapTree.m */; };
 		C0F264D61E359C8200DDAFB1 /* PriorityQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F264D51E359C8200DDAFB1 /* PriorityQueue.m */; };
@@ -37,6 +37,8 @@
 /* Begin PBXFileReference section */
 		C053FF5C1E38E490004D8CD4 /* DataLoadingProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLoadingProc.h; sourceTree = "<group>"; };
 		C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLoadingProc.m; sourceTree = "<group>"; };
+		C066B3BF1E3ADEDE00C76543 /* MapGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapGraph.h; sourceTree = "<group>"; };
+		C066B3C01E3ADEDE00C76543 /* MapGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapGraph.m; sourceTree = "<group>"; };
 		C0F264981E358BC400DDAFB1 /* MapRouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapRouting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F2649B1E358BC400DDAFB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F2649C1E358BC400DDAFB1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,8 +56,6 @@
 		C0F264B91E358BC400DDAFB1 /* MapRoutingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapRoutingTests.m; sourceTree = "<group>"; };
 		C0F264BB1E358BC400DDAFB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0F264C41E358BFE00DDAFB1 /* usa.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = usa.txt; sourceTree = "<group>"; };
-		C0F264C71E358C2E00DDAFB1 /* Graph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
-		C0F264C81E358C2E00DDAFB1 /* Graph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Graph.m; sourceTree = "<group>"; };
 		C0F264CB1E358C2E00DDAFB1 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		C0F264CC1E358C2E00DDAFB1 /* Vertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vertex.m; sourceTree = "<group>"; };
 		C0F264D11E35933A00DDAFB1 /* MinHeapTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinHeapTree.h; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 		C0F264D01E358C6D00DDAFB1 /* Data Structure */ = {
 			isa = PBXGroup;
 			children = (
-				C0F264C71E358C2E00DDAFB1 /* Graph.h */,
-				C0F264C81E358C2E00DDAFB1 /* Graph.m */,
+				C066B3BF1E3ADEDE00C76543 /* MapGraph.h */,
+				C066B3C01E3ADEDE00C76543 /* MapGraph.m */,
 				C0F264CB1E358C2E00DDAFB1 /* Vertex.h */,
 				C0F264CC1E358C2E00DDAFB1 /* Vertex.m */,
 				C0F264D41E359C8200DDAFB1 /* PriorityQueue.h */,
@@ -276,8 +276,8 @@
 				C0F264CF1E358C2E00DDAFB1 /* Vertex.m in Sources */,
 				C0F264A71E358BC400DDAFB1 /* GameScene.m in Sources */,
 				C0F264AA1E358BC400DDAFB1 /* ViewController.m in Sources */,
-				C0F264CD1E358C2E00DDAFB1 /* Graph.m in Sources */,
 				C0F2649D1E358BC400DDAFB1 /* AppDelegate.m in Sources */,
+				C066B3C11E3ADEDE00C76543 /* MapGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

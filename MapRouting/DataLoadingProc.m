@@ -9,8 +9,9 @@
 #import "DataLoadingProc.h"
 
 @implementation DataLoadingProc
--(Graph *)loadGraphFromTxt:(NSString *) fileName{
-    Graph *graph = [[Graph alloc] init];
+-(MapGraph *)loadGraphFromTxt:(NSString *) fileName{
+    //Graph *graph = [[Graph alloc] init];
+    MapGraph *mapGraph = [[MapGraph alloc] init];
     NSString* path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSError *errorReading;
     if(errorReading){
@@ -39,8 +40,8 @@
         NSString *vertexID = [curLine substringWithRange:[match rangeAtIndex:1]];
         double x= [[curLine substringWithRange:[match rangeAtIndex:2]] doubleValue];
         double y = [[curLine substringWithRange:[match rangeAtIndex:3]] doubleValue];
-        Vertex *vertex =[[Vertex alloc] initWithValue:vertexID x:x y:y];
-        [graph addVertex:vertexID vertex:vertex];
+        Vertex *vertex =[[Vertex alloc] initWithValue:[vertexID intValue] x:x y:y];
+        [mapGraph addVertex:[vertexID intValue] vertex:vertex];
     }
     
     for(int i = secondPartStart; i < [linesOfText count]-1;i++){
@@ -55,20 +56,19 @@
         NSTextCheckingResult *match  = [matches objectAtIndex:0];
         NSString *edgeFrom = [curLine substringWithRange:[match rangeAtIndex:1]];
         NSString *edgeTo = [curLine substringWithRange:[match rangeAtIndex:2]];
-        if(![graph contains:edgeFrom] || ![graph contains:edgeTo])
-            [NSException raise:@"one of the vertices of the edge does not exist" format:@"v1: %@, v2:%@", edgeFrom,edgeTo];
-        double weight = [self distanceBetween:[graph getVertex:edgeFrom] and:[graph getVertex:edgeTo]];
-        NSLog(@"%f",weight);
-        [graph addOneWayConnectionFromWithWeight:edgeFrom to:edgeTo weigh:[NSNumber numberWithDouble:weight]];
+
+        double weight = [self distanceBetween:[mapGraph getVertex:[edgeFrom intValue]] and:[mapGraph getVertex:[edgeTo intValue]]];
+        [mapGraph connectedVertex:[edgeFrom intValue] with:[edgeTo intValue] weight:[NSNumber numberWithDouble:weight]];
     }
-    return graph;
+    //return graph;
+    return mapGraph;
 }
 -(double) distanceBetween:(Vertex *)v1 and:(Vertex *)v2{
     double x1 = v1.x;
     double y1 = v1.y;
     double x2 = v2.x;
     double y2 = v2.y;
-    NSLog(@"x1:%f,x2:%f,y1:%f,y2:%f",x1,x2,y1,y2);
+    //NSLog(@"x1:%f,x2:%f,y1:%f,y2:%f",x1,x2,y1,y2);
     double dis = sqrt(fabs((x1-x2)*(x1-x2)) + fabs((y1-y2)*(y1-y2)));
     return dis;
 }

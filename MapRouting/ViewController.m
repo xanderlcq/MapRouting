@@ -29,6 +29,7 @@
     self.skView.showsNodeCount = YES;
     DataLoadingProc *temp = [[DataLoadingProc alloc] init];
     [temp loadGraphFromTxt:@"usa"];
+    
         
     
 }

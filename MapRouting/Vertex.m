@@ -9,26 +9,26 @@
 #import "Vertex.h"
 
 @implementation Vertex
--(id)initWithValue:(NSString *)v{
+-(id)initWithValue:(int)v{
     self = [super init];
     if(self){
         self.value = v;
         self.adjacentWeights = [[NSMutableArray alloc] init];
         self.adjacentVertices = [[NSMutableArray alloc] init];
         self.distance = -1;
-        self.color = @"white";
+        //self.color = @"white";
         self.predecessor = nil;
     }
     return self;
 }
--(id)initWithValue:(NSString *)v x:(double)x y:(double)y{
+-(id)initWithValue:(int)v x:(double)x y:(double)y{
     self = [super init];
     if(self){
         self.value = v;
         self.adjacentWeights = [[NSMutableArray alloc] init];
         self.adjacentVertices = [[NSMutableArray alloc] init];
         self.distance = -1;
-        self.color = @"white";
+        //self.color = @"white";
         self.predecessor = nil;
         self.x = x;
         self.y = y;
