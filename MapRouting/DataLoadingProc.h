@@ -10,4 +10,5 @@
 #import "MapGraph.h"
 @interface DataLoadingProc : NSObject
 -(MapGraph *)loadGraphFromTxt:(NSString *) fileName;
+-(NSMutableArray*)findCordRange:(MapGraph*)graph;
 @end

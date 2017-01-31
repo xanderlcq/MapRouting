@@ -118,4 +118,10 @@
     NSLog(@"Current Index: %i", self.currentIndex);
     NSLog(@"%@",[self toString]);
 }
+-(int) count{
+    return (int)[self.data count];
+}
+-(BOOL) isEmpty{
+    return [self.data count]==1;
+}
 @end

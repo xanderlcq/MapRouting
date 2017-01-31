@@ -25,4 +25,10 @@
 -(BOOL) contains:(Vertex *) v{
     return [self.minHeap contains:v];
 }
+-(int) count{
+    return [self.minHeap count];
+}
+-(BOOL) isEmpty{
+    return [self.minHeap isEmpty];
+}
 @end

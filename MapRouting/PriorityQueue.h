@@ -17,4 +17,6 @@
 -(void) enqueue:(Vertex *) v;
 -(Vertex *) dequeue;
 -(BOOL) contains:(Vertex *) v;
+-(int) count;
+-(BOOL) isEmpty;
 @end

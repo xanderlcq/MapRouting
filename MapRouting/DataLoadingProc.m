@@ -10,7 +10,6 @@
 
 @implementation DataLoadingProc
 -(MapGraph *)loadGraphFromTxt:(NSString *) fileName{
-    //Graph *graph = [[Graph alloc] init];
     MapGraph *mapGraph = [[MapGraph alloc] init];
     NSString* path = [[NSBundle mainBundle] pathForResource:fileName ofType:@"txt"];
     NSError *errorReading;
@@ -43,7 +42,7 @@
         Vertex *vertex =[[Vertex alloc] initWithValue:[vertexID intValue] x:x y:y];
         [mapGraph addVertex:[vertexID intValue] vertex:vertex];
     }
-    
+    NSLog(@"check");
     for(int i = secondPartStart; i < [linesOfText count]-1;i++){
         if([[linesOfText objectAtIndex:i] isEqualToString:@""])
             break;
@@ -72,4 +71,24 @@
     double dis = sqrt(fabs((x1-x2)*(x1-x2)) + fabs((y1-y2)*(y1-y2)));
     return dis;
 }
+
+-(NSMutableArray*)findCordRange:(MapGraph*)graph{
+    int minX = 9999999;
+    int minY = 9999999;
+    int maxX = -1;
+    int maxY = -1;
+    for(Vertex *v in graph.vertices){
+        if(v.x < minX)
+            minX = v.x;
+        if(v.y < minY)
+            minY = v.y;
+        if(v.x > maxX)
+            maxX = v.x;
+        if(v.y > maxY)
+            maxY = v.y;
+    }
+    return [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:minX],[NSNumber numberWithInt:minY],[NSNumber numberWithInt:maxX],[NSNumber numberWithInt:maxY], nil];
+}
+
+
 @end

@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 @interface Vertex : NSObject
 
-//@property NSString *value;
-@property int distance;
+@property double distance;
 @property Vertex *predecessor;
-//@property NSString *color;
+@property BOOL visited;
 @property double x;
 @property double y;
 @property int value;

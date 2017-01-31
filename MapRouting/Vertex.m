@@ -15,9 +15,10 @@
         self.value = v;
         self.adjacentWeights = [[NSMutableArray alloc] init];
         self.adjacentVertices = [[NSMutableArray alloc] init];
-        self.distance = -1;
+        self.distance = INT_MAX;
         //self.color = @"white";
         self.predecessor = nil;
+        self.visited = NO;
     }
     return self;
 }
@@ -27,11 +28,12 @@
         self.value = v;
         self.adjacentWeights = [[NSMutableArray alloc] init];
         self.adjacentVertices = [[NSMutableArray alloc] init];
-        self.distance = -1;
+        self.distance = INT_MAX;
         //self.color = @"white";
         self.predecessor = nil;
         self.x = x;
         self.y = y;
+         self.visited = NO;
     }
     return self;
 }

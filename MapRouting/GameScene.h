@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
+#import "DataLoadingProc.h"
+#import "MapGraph.h"
+#import "DataLoadingProc.h"
+#import "Dijkstra.h"
 @interface GameScene : SKScene
 
 @end

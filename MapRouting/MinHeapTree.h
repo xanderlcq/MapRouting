@@ -18,4 +18,6 @@
 -(NSString *) toString;
 -(void) print;
 -(BOOL) contains:(Vertex *) v;
+-(int) count;
+-(BOOL) isEmpty;
 @end
