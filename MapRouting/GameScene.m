@@ -14,13 +14,12 @@
     MapGraph *graph;
     NSMutableArray *maxRange;
     NSMutableArray *displayRange;
-    
-
+    double click_error;
     double scale_ratio;
 }
 
 - (void)didMoveToView:(SKView *)view {
-
+    click_error = 30;
     DataLoadingProc *dataProc = [[DataLoadingProc alloc] init];
     self.size = NSMakeSize(800, 600);
     graph = [dataProc loadGraphFromTxt:@"test2"];
@@ -46,7 +45,7 @@
     for(int i = 0; i < [graph.vertices count]; i+=increment){
         Vertex *v = [graph.vertices objectAtIndex:i];
         if([self vertexInRange:v in:displayRange]){
-            [self customAddChild:v];
+            [self customAddChild:v color:[NSColor blackColor]];
         }
     }
 }
@@ -63,7 +62,10 @@
 -(BOOL) vertexInRange:(Vertex *) v in:(NSMutableArray *)range{
     return v.x>=[[range objectAtIndex:0] doubleValue]&&v.y>=[[range objectAtIndex:1] doubleValue]&&v.x<=[[range objectAtIndex:2] doubleValue]&&v.y<=[[range objectAtIndex:3] doubleValue];
 }
--(void) customAddChild:(Vertex *) v{
+
+-(void) customAddChild:(Vertex *) v color:(NSColor *) color{
+    if(!v)
+        return;
     double x = v.x;
     double y = v.y;
 
@@ -72,6 +74,8 @@
     double maxX = [[displayRange objectAtIndex:2] doubleValue];
     double maxY = [[displayRange objectAtIndex:3] doubleValue];
     SKShapeNode *node = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(1, 1)];
+    node.fillColor = color;
+    node.strokeColor = color;
     double xRange = maxX - minX;
     double yRange = maxY - minY;
     
@@ -89,17 +93,6 @@
     
 }
 
-- (void)touchDownAtPoint:(CGPoint)pos {
-    NSLog(@"touchDownAtPoint");
-}
-
-- (void)touchMovedToPoint:(CGPoint)pos {
-NSLog(@"touchMovedToPoint");
-}
-
-- (void)touchUpAtPoint:(CGPoint)pos {
-NSLog(@"touchUpAtPoint");
-}
 
 - (void)keyDown:(NSEvent *)theEvent {
     switch (theEvent.keyCode) {
@@ -109,17 +102,11 @@ NSLog(@"touchUpAtPoint");
     }
 }
 
-- (void)mouseDown:(NSEvent *)theEvent {
-    //NSLog(@"mouseDown");
-}
 - (void)mouseDragged:(NSEvent *)theEvent {
     //NSLog(@"mouseDragged");
 }
 - (void)mouseUp:(NSEvent *)theEvent {
-    NSLog(@"mouseUp");
-    
-    NSPoint mouseLoc = [theEvent locationInWindow]; //get current mouse position
-    //NSLog(@"Mouse location: %f %f", mouseLoc.x, mouseLoc.y);
+    NSPoint mouseLoc = [theEvent locationInWindow];
     [self mouseClick:mouseLoc.x y:mouseLoc.y];
 }
 
@@ -127,13 +114,40 @@ NSLog(@"touchUpAtPoint");
     //Convert back to coordinates in the graph data
     double minX = [[displayRange objectAtIndex:0] doubleValue];
     double minY = [[displayRange objectAtIndex:1] doubleValue];
-    x /= scale_ratio;
-    y /= scale_ratio;
-    x += minX;
-    y += minY;
-    NSLog(@"Mouse location: %f %f", x, y);
+    x = x/scale_ratio + minX;
+    y = y/scale_ratio + minY;
+    NSLog(@"Mouse location (converted): %f %f", x, y);
+    Vertex *clickedVertex = [self getVertexAt:x y:y];
+    NSLog(@"Clicked Vertex: (%f,%f)",clickedVertex.x,clickedVertex.y);
+    [self customAddChild:clickedVertex color:[NSColor redColor]];
 }
 
+-(Vertex *) getVertexAt:(double) x y:(double)y{
+    for(Vertex *v in graph.vertices){
+        if((v.x > x-click_error && v.x < x+click_error)&&(v.y > y-click_error && v.y < y+ click_error)){
+            return v;
+        }
+    }
+    return nil;
+}
+
+-(void) drawPath:(NSMutableArray *)path{
+    for(int i =0;i < [path count]-1;i++){
+        Vertex *p1 = [path objectAtIndex:i];
+        Vertex *p2 = [path objectAtIndex:i+1];
+        [self drawLine:p1.x y1:p1.y x2:p2.x y2:p2.y];
+    }
+}
+
+-(void) drawLine:(double)x1 y1:(double)y1 x2:(double)x2 y2:(double)y2{
+    SKShapeNode *line = [SKShapeNode node];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, nil, x1, y1);
+    CGPathAddLineToPoint(path, nil, x2, y2);
+    [line setPath:path];
+    line.lineWidth = 3;
+    [self addChild:line];
+}
 
 -(void)update:(CFTimeInterval)currentTime {
     // Called before each frame is rendered
