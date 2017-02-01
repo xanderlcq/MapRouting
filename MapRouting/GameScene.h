@@ -11,6 +11,19 @@
 #import "MapGraph.h"
 #import "DataLoadingProc.h"
 #import "Dijkstra.h"
+#import "RectangularRange.h"
 @interface GameScene : SKScene
+
+-(void)zoomIn;
+-(void)zoomOut;
+-(void)moveLeft;
+-(void)moveRight;
+-(void)moveUp;
+-(void)moveDown;
+-(void)setStartVertex;
+-(void)setEndVertex;
+-(void)search;
+-(void)resetPath;
+-(void)resetGraph;
 
 @end

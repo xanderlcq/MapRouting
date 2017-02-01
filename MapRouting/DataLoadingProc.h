@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "MapGraph.h"
+#import "RectangularRange.h"
 @interface DataLoadingProc : NSObject
 -(MapGraph *)loadGraphFromTxt:(NSString *) fileName;
--(NSMutableArray*)findCordRange:(MapGraph*)graph;
+-(RectangularRange*)findCordRange:(MapGraph*)graph;
 @end

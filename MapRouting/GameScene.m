@@ -9,44 +9,52 @@
 #import "GameScene.h"
 
 @implementation GameScene {
-    SKShapeNode *_spinnyNode;
-    SKLabelNode *_label;
+
     MapGraph *graph;
-    NSMutableArray *maxRange;
-    NSMutableArray *displayRange;
+    
+    RectangularRange *maxRange;
+    RectangularRange *displayRange;
     double click_error;
     double scale_ratio;
+    
+    NSMutableArray *displayedPath;
+    NSMutableArray *displayedVertex;
+    NSMutableArray *clickedVertices;
 }
 
 - (void)didMoveToView:(SKView *)view {
     click_error = 30;
     DataLoadingProc *dataProc = [[DataLoadingProc alloc] init];
     self.size = NSMakeSize(800, 600);
-    graph = [dataProc loadGraphFromTxt:@"test2"];
+    displayedPath = [[NSMutableArray alloc] init];
+    graph = [dataProc loadGraphFromTxt:@"usa"];
     Dijkstra *dijkstra = [[Dijkstra alloc] initWithGraph:graph];
     Vertex *start = [graph.vertices objectAtIndex:0];
     //[dijkstra calculatePathsFromStart:start];
-    
-    
-    maxRange = [dataProc findCordRange:graph];
-    displayRange = maxRange;
-    [displayRange replaceObjectAtIndex:0 withObject:@2000];
-    [displayRange replaceObjectAtIndex:1 withObject:@2000];
-    [displayRange replaceObjectAtIndex:2 withObject:@5000];
-    [displayRange replaceObjectAtIndex:3 withObject:@5000];
+
+    displayRange = [dataProc findCordRange:graph];
     [self renderMap];
+    clickedVertices = [[NSMutableArray alloc] init];
 }
 
 
 -(void)renderMap{
+    [self removeAllChildren];
     NSLog(@"%@",displayRange);
     int vertexInRange = [self countVertexInRange];
-    int increment = vertexInRange < 5000?1:vertexInRange/5000;
+    int increment = vertexInRange < 2000?1:vertexInRange/2000;
+    NSLog(@"Plot Density Increment: %i",increment);
+    displayedVertex = [[NSMutableArray alloc] init];
     for(int i = 0; i < [graph.vertices count]; i+=increment){
         Vertex *v = [graph.vertices objectAtIndex:i];
         if([self vertexInRange:v in:displayRange]){
+            [displayedVertex addObject:v];
             [self customAddChild:v color:[NSColor blackColor]];
         }
+    }
+    for(Vertex *clicked in clickedVertices){
+        if([self vertexInRange:clicked in:displayRange])
+            [self customAddChild:clicked color:[NSColor redColor]];
     }
 }
 
@@ -59,36 +67,33 @@
     return counter;
 }
 
--(BOOL) vertexInRange:(Vertex *) v in:(NSMutableArray *)range{
-    return v.x>=[[range objectAtIndex:0] doubleValue]&&v.y>=[[range objectAtIndex:1] doubleValue]&&v.x<=[[range objectAtIndex:2] doubleValue]&&v.y<=[[range objectAtIndex:3] doubleValue];
+-(BOOL) vertexInRange:(Vertex *) v in:(RectangularRange *)range{
+    return v.x>=range.minX &&v.y>= range.minY &&v.x<= range.maxX&&v.y<=range.maxY;
 }
 
--(void) customAddChild:(Vertex *) v color:(NSColor *) color{
+-(SKShapeNode *) customAddChild:(Vertex *) v color:(NSColor *) color{
     if(!v)
-        return;
+        return nil;
     double x = v.x;
     double y = v.y;
 
-    double minX = [[displayRange objectAtIndex:0] doubleValue];
-    double minY = [[displayRange objectAtIndex:1] doubleValue];
-    double maxX = [[displayRange objectAtIndex:2] doubleValue];
-    double maxY = [[displayRange objectAtIndex:3] doubleValue];
     SKShapeNode *node = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(1, 1)];
     node.fillColor = color;
     node.strokeColor = color;
-    double xRange = maxX - minX;
-    double yRange = maxY - minY;
+    double xRange = displayRange.maxX - displayRange.minX;
+    double yRange = displayRange.maxY - displayRange.minY;
     
     //Get the smallest pixel/unit
     scale_ratio = (self.size.width)/xRange < (self.size.height) / yRange?(self.size.width)/xRange:(self.size.height) / yRange;
 
     //Shift and shrink
-    x = (x-minX)* scale_ratio;
-    y = (y-minY)* scale_ratio;
+    x = (x-displayRange.minX)* scale_ratio;
+    y = (y-displayRange.minY)* scale_ratio;
     
-    NSLog(@"x:%f, y:%f",x,y);
+    //NSLog(@"Plotting: x:%f, y:%f",x,y);
     node.position = CGPointMake(x, y);
     [self addChild:node];
+    return node;
     
     
 }
@@ -108,26 +113,26 @@
 - (void)mouseUp:(NSEvent *)theEvent {
     NSPoint mouseLoc = [theEvent locationInWindow];
     [self mouseClick:mouseLoc.x y:mouseLoc.y];
+    //NSLog(@"Mouse location (og): %f %f", mouseLoc.x, mouseLoc.y);
 }
 
 -(void) mouseClick:(double)x y:(double)y{
     //Convert back to coordinates in the graph data
-    double minX = [[displayRange objectAtIndex:0] doubleValue];
-    double minY = [[displayRange objectAtIndex:1] doubleValue];
-    x = x/scale_ratio + minX;
-    y = y/scale_ratio + minY;
+    x = x/scale_ratio + displayRange.minX;
+    y = y/scale_ratio + displayRange.minY;
     NSLog(@"Mouse location (converted): %f %f", x, y);
     Vertex *clickedVertex = [self getVertexAt:x y:y];
     NSLog(@"Clicked Vertex: (%f,%f)",clickedVertex.x,clickedVertex.y);
-    [self customAddChild:clickedVertex color:[NSColor redColor]];
+    if(clickedVertex){
+        [self customAddChild:clickedVertex color:[NSColor redColor]];
+        [clickedVertices addObject:clickedVertex];
+    }
 }
 
 -(Vertex *) getVertexAt:(double) x y:(double)y{
-    for(Vertex *v in graph.vertices){
-        if((v.x > x-click_error && v.x < x+click_error)&&(v.y > y-click_error && v.y < y+ click_error)){
+    for(Vertex *v in displayedVertex)
+        if((v.x > x-click_error && v.x < x+click_error)&&(v.y > y-click_error && v.y < y+ click_error))
             return v;
-        }
-    }
     return nil;
 }
 
@@ -135,11 +140,11 @@
     for(int i =0;i < [path count]-1;i++){
         Vertex *p1 = [path objectAtIndex:i];
         Vertex *p2 = [path objectAtIndex:i+1];
-        [self drawLine:p1.x y1:p1.y x2:p2.x y2:p2.y];
+        [displayedPath addObject: [self drawLine:p1.x y1:p1.y x2:p2.x y2:p2.y]];
     }
 }
 
--(void) drawLine:(double)x1 y1:(double)y1 x2:(double)x2 y2:(double)y2{
+-(SKShapeNode *) drawLine:(double)x1 y1:(double)y1 x2:(double)x2 y2:(double)y2{
     SKShapeNode *line = [SKShapeNode node];
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, nil, x1, y1);
@@ -147,10 +152,42 @@
     [line setPath:path];
     line.lineWidth = 3;
     [self addChild:line];
+    return line;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     // Called before each frame is rendered
 }
-
+-(void) test{
+    NSLog(@"test");
+}
+-(void)zoomIn{
+    [displayRange zoomIn:1.2];
+    [self renderMap];
+}
+-(void)zoomOut{
+    [displayRange zoomOut:1.2];
+    [self renderMap];
+}
+-(void)moveDown{
+    [displayRange moveRange:0 dy:-300];
+    [self renderMap];
+}
+-(void)moveUp{
+    [displayRange moveRange:0 dy:300];
+    [self renderMap];
+}
+-(void)moveRight{
+    [displayRange moveRange:150 dy:0];
+    [self renderMap];
+}
+-(void)moveLeft{
+    [displayRange moveRange:-150 dy:0];
+    [self renderMap];
+}
+//-(void)setStartVertex;
+//-(void)setEndVertex;
+//-(void)search;
+//-(void)resetPath;
+//-(void)resetGraph;
 @end

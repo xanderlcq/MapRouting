@@ -72,7 +72,7 @@
     return dis;
 }
 
--(NSMutableArray*)findCordRange:(MapGraph*)graph{
+-(RectangularRange*)findCordRange:(MapGraph*)graph{
     int minX = 9999999;
     int minY = 9999999;
     int maxX = -1;
@@ -87,7 +87,7 @@
         if(v.y > maxY)
             maxY = v.y;
     }
-    return [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:minX],[NSNumber numberWithInt:minY],[NSNumber numberWithInt:maxX],[NSNumber numberWithInt:maxY], nil];
+    return [[RectangularRange alloc] initWithMinX:minX minY:minY maxX:maxX maxY:maxY];
 }
 
 

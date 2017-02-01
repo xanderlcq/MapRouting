@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C01D6CD51E417D11004DCDEA /* RectangularRange.m in Sources */ = {isa = PBXBuildFile; fileRef = C01D6CD41E417D11004DCDEA /* RectangularRange.m */; };
 		C053FF5E1E38E490004D8CD4 /* DataLoadingProc.m in Sources */ = {isa = PBXBuildFile; fileRef = C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */; };
 		C066B3C11E3ADEDE00C76543 /* MapGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C066B3C01E3ADEDE00C76543 /* MapGraph.m */; };
 		C0C8BB9F1E3F784C007B4945 /* Dijkstra.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C8BB9E1E3F784C007B4945 /* Dijkstra.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C01D6CD31E417D11004DCDEA /* RectangularRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangularRange.h; sourceTree = "<group>"; };
+		C01D6CD41E417D11004DCDEA /* RectangularRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectangularRange.m; sourceTree = "<group>"; };
 		C053FF5C1E38E490004D8CD4 /* DataLoadingProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataLoadingProc.h; sourceTree = "<group>"; };
 		C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataLoadingProc.m; sourceTree = "<group>"; };
 		C066B3BF1E3ADEDE00C76543 /* MapGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapGraph.h; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				C066B3C01E3ADEDE00C76543 /* MapGraph.m */,
 				C0F264CB1E358C2E00DDAFB1 /* Vertex.h */,
 				C0F264CC1E358C2E00DDAFB1 /* Vertex.m */,
+				C01D6CD31E417D11004DCDEA /* RectangularRange.h */,
+				C01D6CD41E417D11004DCDEA /* RectangularRange.m */,
 				C0F264D41E359C8200DDAFB1 /* PriorityQueue.h */,
 				C0F264D51E359C8200DDAFB1 /* PriorityQueue.m */,
 				C0F264D11E35933A00DDAFB1 /* MinHeapTree.h */,
@@ -291,6 +296,7 @@
 				C0F264A71E358BC400DDAFB1 /* GameScene.m in Sources */,
 				C0F264AA1E358BC400DDAFB1 /* ViewController.m in Sources */,
 				C0F2649D1E358BC400DDAFB1 /* AppDelegate.m in Sources */,
+				C01D6CD51E417D11004DCDEA /* RectangularRange.m in Sources */,
 				C066B3C11E3ADEDE00C76543 /* MapGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

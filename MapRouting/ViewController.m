@@ -20,8 +20,7 @@
     GameScene *scene = (GameScene *)[SKScene nodeWithFileNamed:@"GameScene"];
     
     // Set the scale mode to scale to fit the window
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
+    scene.scaleMode = SKSceneScaleModeAspectFit;
     // Present the scene
     [self.skView presentScene:scene];
     
@@ -32,5 +31,32 @@
         
     
 }
+- (IBAction)moveDown:(id)sender {
+    [(GameScene*)self.skView.scene moveDown];
+}
+- (IBAction)moveRight:(id)sender {
+    [(GameScene*)self.skView.scene moveRight];
+}
+- (IBAction)moveLeft:(id)sender {
+    [(GameScene*)self.skView.scene moveLeft];
+}
+- (IBAction)moveUp:(id)sender {
+    [(GameScene*)self.skView.scene moveUp];
+}
+
+- (IBAction)zoomOut:(id)sender {
+    NSLog(@"Zoom Out");
+    [(GameScene*)self.skView.scene zoomOut];
+}
+- (IBAction)zoomIn:(id)sender {
+    [(GameScene*)self.skView.scene zoomIn];
+}
+- (IBAction)search:(id)sender {
+}
+- (IBAction)setEnd:(id)sender {
+}
+- (IBAction)setStart:(id)sender {
+}
+
 
 @end
