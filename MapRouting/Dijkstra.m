@@ -27,7 +27,8 @@
     }
     return path;
 }
--(void)calculatePathsFromStart:(Vertex *) start{
+
+-(NSMutableArray *)calculatePathsFromStart:(Vertex *) start to:(Vertex*)target{
     self.start = start;
     self.start.distance = 0;
     self.queue = [[PriorityQueue alloc] init];
@@ -38,6 +39,9 @@
         
         Vertex *minVertex = [self.queue dequeue];
         minVertex.visited = YES;
+        if(target == minVertex)
+            return [self getShortestPathTo:target];
+        
         NSLog(@"Dequeued : (X:%f,Y:%f)",minVertex.x,minVertex.y);
         
         for(int i = 0;i<[minVertex.adjacentVertices count];i++){
@@ -57,6 +61,7 @@
             }
         }
     }
+    return nil;
 }
 
 @end

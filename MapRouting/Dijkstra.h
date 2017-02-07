@@ -16,5 +16,5 @@
 @property Vertex *start;
 @property PriorityQueue *queue;
 -(id) initWithGraph:(MapGraph *) graph;
--(void)calculatePathsFromStart:(Vertex *) start;
+-(NSMutableArray *)calculatePathsFromStart:(Vertex *) start to:(Vertex*)target;
 @end

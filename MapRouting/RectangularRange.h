@@ -24,4 +24,5 @@
 -(void)zoomOut:(double)scale;
 -(void)moveRange:(double) dx dy:(double)dy;
 -(void)reset;
+-(NSString *)description;
 @end

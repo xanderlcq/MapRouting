@@ -106,4 +106,7 @@
     self.maxX = self.ogMaxX;
     self.maxY = self.ogMaxY;
 }
+-(NSString *)description{
+    return [NSString stringWithFormat:@"RectangularRange, minX:%f minY:%f maxX:%f maxY:%f",self.minX,self.minY,self.maxX,self.maxY];
+}
 @end

@@ -10,10 +10,12 @@
 #import "Vertex.h"
 @interface MapGraph : NSObject
 @property NSMutableArray *vertices;
+
 -(id) init;
 -(void) addVertex:(int) vertexIndex vertex:(Vertex*)v;
 -(BOOL) contains:(int) vertexIndex;
 -(void) connectedVertex:(int) vertex1 with:(int) vertex2 weight:(NSNumber *) weight;
 -(Vertex *) getVertex:(int) vertexIndex;
 -(NSNumber *) getWeightFrom:(int) vertex1 to:(int)vertex2;
+-(void) reset;
 @end

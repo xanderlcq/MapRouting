@@ -23,7 +23,7 @@
 -(void)setStartVertex;
 -(void)setEndVertex;
 -(void)search;
--(void)resetPath;
--(void)resetGraph;
+-(void)resetHard;
+-(void)resetGraphics;
 
 @end

@@ -19,7 +19,6 @@
 @property NSMutableArray * adjacentVertices;
 @property NSMutableArray * adjacentWeights;
 
--(id)initWithValue:(int)v;
 -(id)initWithValue:(int)v x:(double)x y:(double)y;
 
 
@@ -27,4 +26,5 @@
 -(void) addAjacent:(Vertex *) vertext;
 -(void) addAjacentWithWeight:(Vertex *) vertext weigh:(NSNumber*) weight;
 -(NSNumber *) getWeightTo:(Vertex *) vertex;
+-(NSString *)description;
 @end

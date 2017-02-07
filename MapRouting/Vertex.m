@@ -9,19 +9,7 @@
 #import "Vertex.h"
 
 @implementation Vertex
--(id)initWithValue:(int)v{
-    self = [super init];
-    if(self){
-        self.value = v;
-        self.adjacentWeights = [[NSMutableArray alloc] init];
-        self.adjacentVertices = [[NSMutableArray alloc] init];
-        self.distance = INT_MAX;
-        //self.color = @"white";
-        self.predecessor = nil;
-        self.visited = NO;
-    }
-    return self;
-}
+
 -(id)initWithValue:(int)v x:(double)x y:(double)y{
     self = [super init];
     if(self){
@@ -29,7 +17,6 @@
         self.adjacentWeights = [[NSMutableArray alloc] init];
         self.adjacentVertices = [[NSMutableArray alloc] init];
         self.distance = INT_MAX;
-        //self.color = @"white";
         self.predecessor = nil;
         self.x = x;
         self.y = y;
@@ -53,5 +40,8 @@
     if(![self containsAdjacent:vertex])
         return nil;
     return [self.adjacentWeights objectAtIndex:[self.adjacentVertices indexOfObject:vertex]];
+}
+-(NSString *)description{
+    return [NSString stringWithFormat:@"Vertex: Value: %i x:%f,y:%f",self.value,self.x,self.y];
 }
 @end

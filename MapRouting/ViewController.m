@@ -31,6 +31,7 @@
         
     
 }
+
 - (IBAction)moveDown:(id)sender {
     [(GameScene*)self.skView.scene moveDown];
 }
@@ -43,7 +44,6 @@
 - (IBAction)moveUp:(id)sender {
     [(GameScene*)self.skView.scene moveUp];
 }
-
 - (IBAction)zoomOut:(id)sender {
     NSLog(@"Zoom Out");
     [(GameScene*)self.skView.scene zoomOut];
@@ -51,12 +51,23 @@
 - (IBAction)zoomIn:(id)sender {
     [(GameScene*)self.skView.scene zoomIn];
 }
+
+
 - (IBAction)search:(id)sender {
+    [(GameScene*)self.skView.scene search];
 }
 - (IBAction)setEnd:(id)sender {
+    [(GameScene*)self.skView.scene setEndVertex];
 }
 - (IBAction)setStart:(id)sender {
+    [(GameScene*)self.skView.scene setStartVertex];
 }
 
+- (IBAction)resetDisplay:(id)sender {
+    [(GameScene*)self.skView.scene resetGraphics];
+}
+- (IBAction)resetHard:(id)sender {
+    [(GameScene*)self.skView.scene resetHard];
+}
 
 @end

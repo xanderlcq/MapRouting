@@ -12,29 +12,33 @@
 
     MapGraph *graph;
     
-    RectangularRange *maxRange;
     RectangularRange *displayRange;
     double click_error;
     double scale_ratio;
     
-    NSMutableArray *displayedPath;
-    NSMutableArray *displayedVertex;
-    NSMutableArray *clickedVertices;
+    
+    NSMutableArray *displayedVertices;
+    NSMutableArray *shortestPath;
+    Vertex *startVertex;
+    Vertex *targetVertex;
+    
+    int mode;
+    // 0 - pending
+    // 1 - setting start
+    // 2 - setting end
 }
 
 - (void)didMoveToView:(SKView *)view {
+    mode = 0;
     click_error = 30;
     DataLoadingProc *dataProc = [[DataLoadingProc alloc] init];
     self.size = NSMakeSize(800, 600);
-    displayedPath = [[NSMutableArray alloc] init];
+
     graph = [dataProc loadGraphFromTxt:@"usa"];
-    Dijkstra *dijkstra = [[Dijkstra alloc] initWithGraph:graph];
-    Vertex *start = [graph.vertices objectAtIndex:0];
-    //[dijkstra calculatePathsFromStart:start];
+
 
     displayRange = [dataProc findCordRange:graph];
     [self renderMap];
-    clickedVertices = [[NSMutableArray alloc] init];
 }
 
 
@@ -44,20 +48,22 @@
     int vertexInRange = [self countVertexInRange];
     int increment = vertexInRange < 2000?1:vertexInRange/2000;
     NSLog(@"Plot Density Increment: %i",increment);
-    displayedVertex = [[NSMutableArray alloc] init];
+    displayedVertices = [[NSMutableArray alloc] init];
+    
     for(int i = 0; i < [graph.vertices count]; i+=increment){
         Vertex *v = [graph.vertices objectAtIndex:i];
         if([self vertexInRange:v in:displayRange]){
-            [displayedVertex addObject:v];
-            [self customAddChild:v color:[NSColor blackColor]];
+            [displayedVertices addObject:v];
+            [self customAddChild:v color:[NSColor blackColor] size:1];
         }
     }
-    for(Vertex *clicked in clickedVertices){
-        if([self vertexInRange:clicked in:displayRange])
-            [self customAddChild:clicked color:[NSColor redColor]];
-    }
+    if(startVertex)
+        [self customAddChild:startVertex color:[NSColor greenColor] size:3];
+    if(targetVertex)
+        [self customAddChild:targetVertex color:[NSColor blueColor] size:3];
+    if(shortestPath)
+        [self drawPath:shortestPath];
 }
-
 
 -(int) countVertexInRange{
     int counter = 0;
@@ -71,13 +77,13 @@
     return v.x>=range.minX &&v.y>= range.minY &&v.x<= range.maxX&&v.y<=range.maxY;
 }
 
--(SKShapeNode *) customAddChild:(Vertex *) v color:(NSColor *) color{
+-(SKShapeNode *) customAddChild:(Vertex *) v color:(NSColor *) color size:(int)r{
     if(!v)
         return nil;
     double x = v.x;
     double y = v.y;
 
-    SKShapeNode *node = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(1, 1)];
+    SKShapeNode *node = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(r, r)];
     node.fillColor = color;
     node.strokeColor = color;
     double xRange = displayRange.maxX - displayRange.minX;
@@ -94,8 +100,6 @@
     node.position = CGPointMake(x, y);
     [self addChild:node];
     return node;
-    
-    
 }
 
 
@@ -108,29 +112,47 @@
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent {
-    //NSLog(@"mouseDragged");
+//    CGFloat dx = [theEvent deltaX];
+//    CGFloat dy = [theEvent deltaY];
+//    dx = dx/scale_ratio+displayRange.minX;
+//    dy = dy/scale_ratio+displayRange.minY;
+//    [displayRange moveRange:dx dy:dy];
+//    [self renderMap];
+//    NSLog(@"mouseDragged");
 }
+
 - (void)mouseUp:(NSEvent *)theEvent {
     NSPoint mouseLoc = [theEvent locationInWindow];
     [self mouseClick:mouseLoc.x y:mouseLoc.y];
-    //NSLog(@"Mouse location (og): %f %f", mouseLoc.x, mouseLoc.y);
 }
 
 -(void) mouseClick:(double)x y:(double)y{
+    if(mode == 0)
+        return;
+    
     //Convert back to coordinates in the graph data
     x = x/scale_ratio + displayRange.minX;
     y = y/scale_ratio + displayRange.minY;
     NSLog(@"Mouse location (converted): %f %f", x, y);
+    
     Vertex *clickedVertex = [self getVertexAt:x y:y];
-    NSLog(@"Clicked Vertex: (%f,%f)",clickedVertex.x,clickedVertex.y);
-    if(clickedVertex){
-        [self customAddChild:clickedVertex color:[NSColor redColor]];
-        [clickedVertices addObject:clickedVertex];
+    if(mode == 1){
+        if(clickedVertex){
+            startVertex = clickedVertex;
+            [self renderMap];
+        }
     }
+    if(mode == 2){
+        if(clickedVertex)
+            targetVertex = clickedVertex;
+            [self renderMap];
+    }
+    
+    
 }
 
 -(Vertex *) getVertexAt:(double) x y:(double)y{
-    for(Vertex *v in displayedVertex)
+    for(Vertex *v in displayedVertices)
         if((v.x > x-click_error && v.x < x+click_error)&&(v.y > y-click_error && v.y < y+ click_error))
             return v;
     return nil;
@@ -140,7 +162,9 @@
     for(int i =0;i < [path count]-1;i++){
         Vertex *p1 = [path objectAtIndex:i];
         Vertex *p2 = [path objectAtIndex:i+1];
-        [displayedPath addObject: [self drawLine:p1.x y1:p1.y x2:p2.x y2:p2.y]];
+        if([self vertexInRange:p1 in:displayRange]||[self vertexInRange:p1 in:displayRange]){
+            [self drawLine:(p1.x-displayRange.minX)*scale_ratio y1:(p1.y-displayRange.minY)*scale_ratio x2:(p2.x-displayRange.minX)*scale_ratio y2:(p2.y-displayRange.minY)*scale_ratio];
+        }
     }
 }
 
@@ -150,16 +174,15 @@
     CGPathMoveToPoint(path, nil, x1, y1);
     CGPathAddLineToPoint(path, nil, x2, y2);
     [line setPath:path];
-    line.lineWidth = 3;
+    line.lineWidth = 2;
+    line.fillColor = [NSColor redColor];
+    line.strokeColor = [NSColor redColor];
     [self addChild:line];
     return line;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     // Called before each frame is rendered
-}
--(void) test{
-    NSLog(@"test");
 }
 -(void)zoomIn{
     [displayRange zoomIn:1.2];
@@ -185,9 +208,32 @@
     [displayRange moveRange:-150 dy:0];
     [self renderMap];
 }
-//-(void)setStartVertex;
-//-(void)setEndVertex;
-//-(void)search;
-//-(void)resetPath;
-//-(void)resetGraph;
+-(void)setStartVertex{
+    mode = 1;
+}
+-(void)setEndVertex{
+    mode = 2;
+}
+-(void)search{
+    if(startVertex && targetVertex){
+        Dijkstra *dijkstra = [[Dijkstra alloc] initWithGraph:graph];
+        shortestPath = [dijkstra calculatePathsFromStart:startVertex to:targetVertex];
+        NSLog(@"%@",shortestPath);
+        [self drawPath:shortestPath];
+    }
+}
+-(void)resetHard{
+    [graph reset];
+    startVertex = nil;
+    targetVertex = nil;
+    shortestPath = nil;
+    [displayRange reset];
+    [self renderMap];
+    mode = 0;
+}
+
+-(void)resetGraphics{
+    [displayRange reset];
+    [self renderMap];
+}
 @end

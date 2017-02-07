@@ -16,7 +16,7 @@
     self = [super init];
     if(self) {
         self.vertices = [[NSMutableArray alloc] init];
-        placeHolder = [[Vertex alloc] initWithValue:-999];
+        placeHolder = [[Vertex alloc] initWithValue:-999 x:-999 y:-999];
     }
     return self;
 }
@@ -45,5 +45,12 @@
 
 -(NSNumber *) getWeightFrom:(int) vertex1 to:(int)vertex2{
     return nil;
+}
+-(void) reset{
+    for(Vertex *v in self.vertices){
+        v.visited = NO;
+        v.predecessor = nil;
+        v.distance = INT_MAX;
+    }
 }
 @end

@@ -11,6 +11,7 @@
 @interface MinHeapTree : NSObject
 @property int currentIndex;
 @property NSMutableArray *data;
+
 -(id) init;
 -(id) initWithObjectFromArray:(NSArray *) arr;
 -(void) insertVertex:(Vertex *) v;
