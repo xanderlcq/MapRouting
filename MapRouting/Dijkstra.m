@@ -34,11 +34,11 @@
     self.queue = [[PriorityQueue alloc] init];
     [self.queue enqueue:self.start];
     
-    
     while(![self.queue isEmpty]){
         
         Vertex *minVertex = [self.queue dequeue];
         minVertex.visited = YES;
+        
         if(target == minVertex)
             return [self getShortestPathTo:target];
         
@@ -46,7 +46,6 @@
             Vertex *neighbor = [minVertex.adjacentVertices objectAtIndex:i];
             if(!neighbor.visited){
                 if(neighbor.distance > minVertex.distance+[[minVertex.adjacentWeights objectAtIndex:i] intValue]){
-                    
                     neighbor.distance = minVertex.distance+[[minVertex.adjacentWeights objectAtIndex:i] intValue];
                     neighbor.predecessor = minVertex;
                 }

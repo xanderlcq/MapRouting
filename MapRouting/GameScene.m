@@ -35,8 +35,6 @@
     self.size = NSMakeSize(800, 600);
 
     graph = [dataProc loadGraphFromTxt:@"usa"];
-
-
     displayRange = [dataProc findCordRange:graph];
     [self renderMap];
 }
@@ -114,6 +112,7 @@
 }
 
 -(void) drawPath:(NSMutableArray *)path{
+    [self updateScaleRatio];
     for(int i =0;i < [path count]-1;i++){
         Vertex *p1 = [path objectAtIndex:i];
         Vertex *p2 = [path objectAtIndex:i+1];
