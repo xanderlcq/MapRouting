@@ -41,8 +41,56 @@
     [self renderMap];
 }
 
+//========== User interaction Function============
+- (void)mouseDragged:(NSEvent *)theEvent {
+    [self updateScaleRatio];
+    CGFloat dx = [theEvent deltaX]/scale_ratio;
+    CGFloat dy = [theEvent deltaY]/scale_ratio;
+    NSLog(@"Mouse Dragged: dx: %f, dy:%f",-dx,dy);
+    [displayRange moveRange:-dx dy:dy];
+    [self updateScaleRatio];
+
+}
+
+- (void)mouseUp:(NSEvent *)theEvent {
+    NSPoint mouseLoc = [theEvent locationInWindow];
+    [self mouseClick:mouseLoc.x y:mouseLoc.y];
+    [self renderMap];
+}
+
+-(void) mouseClick:(double)x y:(double)y{
+    if(mode == 0)
+        return;
+    
+    //Convert back to coordinates in the graph data
+    x = x/scale_ratio + displayRange.minX;
+    y = y/scale_ratio + displayRange.minY;
+    NSLog(@"Mouse Up (converted): %f %f", x, y);
+    
+    Vertex *clickedVertex = [self getVertexAt:x y:y];
+    if(mode == 1){
+        if(clickedVertex){
+            startVertex = clickedVertex;
+        }
+    }
+    if(mode == 2){
+        if(clickedVertex){
+            targetVertex = clickedVertex;
+        }
+    }
+}
+
+//=========== Display Helper Function=============
+-(void) updateScaleRatio{
+    double xRange = displayRange.maxX - displayRange.minX;
+    double yRange = displayRange.maxY - displayRange.minY;
+    
+    //Get the smallest pixel/unit
+    scale_ratio = (self.size.width)/xRange < (self.size.height) / yRange?(self.size.width)/xRange:(self.size.height) / yRange;
+}
 
 -(void)renderMap{
+    [self updateScaleRatio];
     [self removeAllChildren];
     NSLog(@"%@",displayRange);
     int vertexInRange = [self countVertexInRange];
@@ -58,104 +106,11 @@
         }
     }
     if(startVertex)
-        [self customAddChild:startVertex color:[NSColor greenColor] size:3];
+        [self customAddChild:startVertex color:[NSColor greenColor] size:4];
     if(targetVertex)
-        [self customAddChild:targetVertex color:[NSColor blueColor] size:3];
+        [self customAddChild:targetVertex color:[NSColor blueColor] size:4];
     if(shortestPath)
         [self drawPath:shortestPath];
-}
-
--(int) countVertexInRange{
-    int counter = 0;
-    for(Vertex* v in graph.vertices)
-        if([self vertexInRange:v in:displayRange])
-            counter++;
-    return counter;
-}
-
--(BOOL) vertexInRange:(Vertex *) v in:(RectangularRange *)range{
-    return v.x>=range.minX &&v.y>= range.minY &&v.x<= range.maxX&&v.y<=range.maxY;
-}
-
--(SKShapeNode *) customAddChild:(Vertex *) v color:(NSColor *) color size:(int)r{
-    if(!v)
-        return nil;
-    double x = v.x;
-    double y = v.y;
-
-    SKShapeNode *node = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(r, r)];
-    node.fillColor = color;
-    node.strokeColor = color;
-    double xRange = displayRange.maxX - displayRange.minX;
-    double yRange = displayRange.maxY - displayRange.minY;
-    
-    //Get the smallest pixel/unit
-    scale_ratio = (self.size.width)/xRange < (self.size.height) / yRange?(self.size.width)/xRange:(self.size.height) / yRange;
-
-    //Shift and shrink
-    x = (x-displayRange.minX)* scale_ratio;
-    y = (y-displayRange.minY)* scale_ratio;
-    
-    //NSLog(@"Plotting: x:%f, y:%f",x,y);
-    node.position = CGPointMake(x, y);
-    [self addChild:node];
-    return node;
-}
-
-
-- (void)keyDown:(NSEvent *)theEvent {
-    switch (theEvent.keyCode) {
-        default:
-            NSLog(@"keyDown:'%@' keyCode: 0x%02X", theEvent.characters, theEvent.keyCode);
-            break;
-    }
-}
-
-- (void)mouseDragged:(NSEvent *)theEvent {
-//    CGFloat dx = [theEvent deltaX];
-//    CGFloat dy = [theEvent deltaY];
-//    dx = dx/scale_ratio+displayRange.minX;
-//    dy = dy/scale_ratio+displayRange.minY;
-//    [displayRange moveRange:dx dy:dy];
-//    [self renderMap];
-//    NSLog(@"mouseDragged");
-}
-
-- (void)mouseUp:(NSEvent *)theEvent {
-    NSPoint mouseLoc = [theEvent locationInWindow];
-    [self mouseClick:mouseLoc.x y:mouseLoc.y];
-}
-
--(void) mouseClick:(double)x y:(double)y{
-    if(mode == 0)
-        return;
-    
-    //Convert back to coordinates in the graph data
-    x = x/scale_ratio + displayRange.minX;
-    y = y/scale_ratio + displayRange.minY;
-    NSLog(@"Mouse location (converted): %f %f", x, y);
-    
-    Vertex *clickedVertex = [self getVertexAt:x y:y];
-    if(mode == 1){
-        if(clickedVertex){
-            startVertex = clickedVertex;
-            [self renderMap];
-        }
-    }
-    if(mode == 2){
-        if(clickedVertex)
-            targetVertex = clickedVertex;
-            [self renderMap];
-    }
-    
-    
-}
-
--(Vertex *) getVertexAt:(double) x y:(double)y{
-    for(Vertex *v in displayedVertices)
-        if((v.x > x-click_error && v.x < x+click_error)&&(v.y > y-click_error && v.y < y+ click_error))
-            return v;
-    return nil;
 }
 
 -(void) drawPath:(NSMutableArray *)path{
@@ -181,9 +136,48 @@
     return line;
 }
 
--(void)update:(CFTimeInterval)currentTime {
-    // Called before each frame is rendered
+-(SKShapeNode *) customAddChild:(Vertex *) v color:(NSColor *) color size:(int)r{
+    if(!v)
+        return nil;
+    double x = v.x;
+    double y = v.y;
+    
+    SKShapeNode *node = [SKShapeNode shapeNodeWithEllipseOfSize:CGSizeMake(r, r)];
+    node.fillColor = color;
+    node.strokeColor = color;
+    [self updateScaleRatio];
+    
+    //Shift and shrink
+    x = (x-displayRange.minX)* scale_ratio;
+    y = (y-displayRange.minY)* scale_ratio;
+    
+    //NSLog(@"Plotting: x:%f, y:%f",x,y);
+    node.position = CGPointMake(x, y);
+    [self addChild:node];
+    return node;
 }
+
+//========== Pure Helper Function=================
+-(int) countVertexInRange{
+    int counter = 0;
+    for(Vertex* v in graph.vertices)
+        if([self vertexInRange:v in:displayRange])
+            counter++;
+    return counter;
+}
+
+-(BOOL) vertexInRange:(Vertex *) v in:(RectangularRange *)range{
+    return v.x>=range.minX &&v.y>= range.minY &&v.x<= range.maxX&&v.y<=range.maxY;
+}
+
+-(Vertex *) getVertexAt:(double) x y:(double)y{
+    for(Vertex *v in displayedVertices)
+        if((v.x > x-click_error && v.x < x+click_error)&&(v.y > y-click_error && v.y < y+ click_error))
+            return v;
+    return nil;
+}
+
+//========== View Controller Calls these functions=================
 -(void)zoomIn{
     [displayRange zoomIn:1.2];
     [self renderMap];

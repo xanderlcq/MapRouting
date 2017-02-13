@@ -26,10 +26,6 @@
     
     self.skView.showsFPS = YES;
     self.skView.showsNodeCount = YES;
-
-    
-        
-    
 }
 
 - (IBAction)moveDown:(id)sender {

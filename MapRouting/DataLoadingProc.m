@@ -73,10 +73,10 @@
 }
 
 -(RectangularRange*)findCordRange:(MapGraph*)graph{
-    int minX = 9999999;
-    int minY = 9999999;
-    int maxX = -1;
-    int maxY = -1;
+    int minX = INT_MAX;
+    int minY = INT_MAX;
+    int maxX = INT_MIN;
+    int maxY = INT_MIN;
     for(Vertex *v in graph.vertices){
         if(v.x < minX)
             minX = v.x;

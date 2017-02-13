@@ -11,7 +11,6 @@
 		C053FF5E1E38E490004D8CD4 /* DataLoadingProc.m in Sources */ = {isa = PBXBuildFile; fileRef = C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */; };
 		C066B3C11E3ADEDE00C76543 /* MapGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = C066B3C01E3ADEDE00C76543 /* MapGraph.m */; };
 		C0C8BB9F1E3F784C007B4945 /* Dijkstra.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C8BB9E1E3F784C007B4945 /* Dijkstra.m */; };
-		C0C8BBA11E3F8047007B4945 /* test.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0C8BBA01E3F8047007B4945 /* test.txt */; };
 		C0C8BBA31E3F8278007B4945 /* test2.txt in Resources */ = {isa = PBXBuildFile; fileRef = C0C8BBA21E3F8278007B4945 /* test2.txt */; };
 		C0F2649D1E358BC400DDAFB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F2649C1E358BC400DDAFB1 /* AppDelegate.m */; };
 		C0F264A01E358BC400DDAFB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F2649F1E358BC400DDAFB1 /* main.m */; };
@@ -47,7 +46,6 @@
 		C066B3C01E3ADEDE00C76543 /* MapGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapGraph.m; sourceTree = "<group>"; };
 		C0C8BB9D1E3F784C007B4945 /* Dijkstra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dijkstra.h; sourceTree = "<group>"; };
 		C0C8BB9E1E3F784C007B4945 /* Dijkstra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dijkstra.m; sourceTree = "<group>"; };
-		C0C8BBA01E3F8047007B4945 /* test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 		C0C8BBA21E3F8278007B4945 /* test2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.txt; sourceTree = "<group>"; };
 		C0F264981E358BC400DDAFB1 /* MapRouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapRouting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F2649B1E358BC400DDAFB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,10 +115,10 @@
 				C0F2649C1E358BC400DDAFB1 /* AppDelegate.m */,
 				C0F264A11E358BC400DDAFB1 /* GameScene.sks */,
 				C0F264A31E358BC400DDAFB1 /* Actions.sks */,
-				C0F264A51E358BC400DDAFB1 /* GameScene.h */,
-				C0F264A61E358BC400DDAFB1 /* GameScene.m */,
 				C0F264A81E358BC400DDAFB1 /* ViewController.h */,
 				C0F264A91E358BC400DDAFB1 /* ViewController.m */,
+				C0F264A51E358BC400DDAFB1 /* GameScene.h */,
+				C0F264A61E358BC400DDAFB1 /* GameScene.m */,
 				C0F264D01E358C6D00DDAFB1 /* Data Structure */,
 				C0F264C61E358C0300DDAFB1 /* Map Data */,
 				C0F264AB1E358BC400DDAFB1 /* Assets.xcassets */,
@@ -154,7 +152,6 @@
 				C053FF5C1E38E490004D8CD4 /* DataLoadingProc.h */,
 				C053FF5D1E38E490004D8CD4 /* DataLoadingProc.m */,
 				C0F264C41E358BFE00DDAFB1 /* usa.txt */,
-				C0C8BBA01E3F8047007B4945 /* test.txt */,
 				C0C8BBA21E3F8278007B4945 /* test2.txt */,
 			);
 			name = "Map Data";
@@ -267,7 +264,6 @@
 				C0F264AC1E358BC400DDAFB1 /* Assets.xcassets in Resources */,
 				C0F264C51E358BFE00DDAFB1 /* usa.txt in Resources */,
 				C0F264A41E358BC400DDAFB1 /* Actions.sks in Resources */,
-				C0C8BBA11E3F8047007B4945 /* test.txt in Resources */,
 				C0F264AF1E358BC400DDAFB1 /* Main.storyboard in Resources */,
 				C0C8BBA31E3F8278007B4945 /* test2.txt in Resources */,
 			);

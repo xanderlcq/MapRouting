@@ -42,22 +42,16 @@
         if(target == minVertex)
             return [self getShortestPathTo:target];
         
-        NSLog(@"Dequeued : (X:%f,Y:%f)",minVertex.x,minVertex.y);
-        
         for(int i = 0;i<[minVertex.adjacentVertices count];i++){
             Vertex *neighbor = [minVertex.adjacentVertices objectAtIndex:i];
-            
             if(!neighbor.visited){
                 if(neighbor.distance > minVertex.distance+[[minVertex.adjacentWeights objectAtIndex:i] intValue]){
                     
                     neighbor.distance = minVertex.distance+[[minVertex.adjacentWeights objectAtIndex:i] intValue];
                     neighbor.predecessor = minVertex;
-                    NSLog(@"----Lower distance to (X:%f,Y:%f) to: %f",neighbor.x,neighbor.y,neighbor.distance);
                 }
-                if(![self.queue contains:neighbor]){
+                if(![self.queue contains:neighbor])
                     [self.queue enqueue:neighbor];
-                    NSLog(@"Enqueued : (X:%f,Y:%f)",neighbor.x,neighbor.y);
-                }
             }
         }
     }
